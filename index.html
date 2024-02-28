@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive AI</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+    #container {
+      width: 800px; /* Increased container width to accommodate larger AI size */
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    #ai-icon {
+      width: 500px; /* Enlarged AI size */
+      height: auto; /* Adjust height automatically */
+      margin-right: 20px; /* Add margin to the right side */
+      display: block;
+      animation: moveAndBlink 5s infinite alternate;
+      float: left; /* Align to the left */
+    }
+    @keyframes moveAndBlink {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+    .callout {
+      background-image: url('https://cdn.pixabay.com/photo/2012/04/15/21/57/callout-35456_1280.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 10px; /* Adjust padding to fit the callout image */
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+    button {
+      display: block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div id="container">
+  <img id="ai-icon" src="https://static.wixstatic.com/media/a89add_3d73f7e43cff4f37bdf0af4772ef6595~mv2.gif" alt="AI Icon">
+  <div id="response"></div>
+  <button id="advice-btn">Give Advice</button>
+  <button id="activity-btn">Suggest Activity</button>
+</div>
+
+<script>
+  var adviceList = [
+    "Embrace failure as a stepping stone to success.",
+    "Practice gratitude daily.",
+    "Always be curious and never stop learning.",
+    "Surround yourself with positive influences.",
+    "Take care of your physical health.",
+    "Set clear, achievable goals.",
+    "Trust your instincts.",
+    "Prioritize quality over quantity.",
+    "Invest in meaningful relationships.",
+    "Learn to say no when necessary.",
+    "Take calculated risks.",
+    "Stay humble, but confident.",
+    "Be adaptable to change.",
+    "Find time for solitude and reflection.",
+    "Keep a journal to track your progress.",
+    "Foster empathy and understanding.",
+    "Take breaks to recharge.",
+    "Seek feedback and constructive criticism.",
+    "Don't compare yourself to others.",
+    "Practice active listening.",
+    "Cultivate patience and resilience.",
+    "Be kind to yourself and others.",
+    "Set boundaries to protect your time and energy.",
+    "Celebrate small victories along the way.",
+    "Stay organized and prioritize tasks.",
+    "Practice mindfulness and meditation.",
+    "Don't be afraid to ask for help.",
+    "Focus on solutions, not problems."
+  ];
+
+  var activityList = [
+    "Watch a funny movie or TV show.",
+    "Take up a hobby you enjoy, like painting or cooking.",
+    "Go for a bike ride or a hike in nature.",
+    "Try a new recipe and cook yourself a delicious meal.",
+    "Practice mindfulness or meditation for a few minutes."
+  ];
+
+  var selfTalkList = [
+    "Hmm, what should I do next?",
+    "I wonder what Yanyan is up to.",
+    "Let me think...",
+    "How can I improve myself today?",
+    "What's the meaning of life?",
+    "Should I learn a new skill?",
+    "I need to organize my thoughts.",
+    "Let's analyze this situation.",
+    "I hope Yanyan is having a good day.",
+    "Time flies by so fast...",
+    "What's the best way to achieve my goals?",
+    "I should remember to take breaks.",
+    "Do I need to recharge my batteries?",
+    "Every problem has a solution.",
+    "I'm grateful for this opportunity to help Yanyan."
+  ];
+
+  var responseDiv = document.getElementById('response');
+
+  function getRandomItem(array) {
+    return array[Math.floor(Math.random() * array.length)];
+  }
+
+  function displayResponse(response) {
+    responseDiv.innerHTML = ""; // Remove previous responses
+    var callout = document.createElement('div');
+    callout.classList.add('callout');
+    callout.style.width = (document.getElementById('ai-icon').offsetWidth * 0.5) + "px"; // Set width of callout to 50% of AI size
+    callout.innerHTML = "<p>" + response + "</p>";
+    responseDiv.appendChild(callout);
+  }
+
+  // Event listener for mouse entering the AI icon
+  document.getElementById('ai-icon').addEventListener('mouseenter', function() {
+    displayResponse("Welcome back, Yanyan!");
+  });
+
+  // Event listener for mouse leaving the AI icon
+  document.getElementById('ai-icon').addEventListener('mouseleave', function() {
+    displayResponse("Phew, that tickles!");
+  });
+
+  document.getElementById('advice-btn').addEventListener('click', function() {
+    var advice = getRandomItem(adviceList);
+    displayResponse("<strong>Advice:</strong> " + advice);
+  });
+
+  document.getElementById('activity-btn').addEventListener('click', function() {
+    var activity = getRandomItem(activityList);
+    displayResponse("<strong>Suggested Activity:</strong> " + activity);
+  });
+
+  // Event listener for Seyo talking to himself
+  setInterval(function() {
+    var selfTalk = getRandomItem(selfTalkList);
+    displayResponse("<strong>Seyo:</strong> " + selfTalk);
+  }, 300000); // Seyo talks to himself every 5 minutes (300,000 milliseconds)
+</script>
+
+</body>
+</html>
